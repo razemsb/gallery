@@ -6,31 +6,6 @@ if($_SESSION['user_login']) {
 
 $message = ""; 
 
-if (isset($_GET['delete']) && isset($_GET['file'])) {
-    $fileToDelete = $_GET['file'];
-    $filePath = "files/" . $fileToDelete;
-
-    if (file_exists($filePath)) {
-        if (unlink($filePath)) {
-
-            $sql = "DELETE FROM files WHERE Filename = ?";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("s", $fileToDelete);
-
-            if ($stmt->execute()) {
-                $message = "Файл '$fileToDelete' успешно удален.";
-            } else {
-                $message = "Ошибка при удалении файла из базы данных: " . $stmt->error;
-            }
-            $stmt->close();
-        } else {
-            $message = "Не удалось удалить файл с сервера.";
-        }
-    } else {
-        $message = "Файл не найден.";
-    }
-}
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES["filename"])) {
     if ($_FILES["filename"]["error"] == UPLOAD_ERR_OK) {
         $name = basename($_FILES["filename"]["name"]);
@@ -97,6 +72,7 @@ $result = $conn->query($sql);
                  alt="<?php echo $row['Filename']; ?>" 
                  class="image" 
                  onclick="openModal('<?php echo $row['Filename']; ?>', '<?php echo $row['upload_user']; ?>', '<?php echo $row['upload_date']; ?>')">
+                 <div class="file-name"><?php echo $row['Filename']; ?></div>
             <a class="users">Файл загружен: <?php echo $row['upload_user']; ?></a>
         </div>
     <?php } ?>

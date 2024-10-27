@@ -36,7 +36,7 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/account.css">
     <title>Аккаунт <? echo $user_login; ?></title>
 </head>
 <body>
@@ -52,9 +52,11 @@ $result = $conn->query($sql);
             <div class="image-block">
                 <img src="files/<?php echo $row['Filename']; ?>" alt="<?php echo $row['Filename']; ?>">
                 <a href="?delete=true&file=<?php echo $row['Filename']; ?>" class="a">Удалить</a>
-                <a class="users">Файл загружен: <?php echo $row['upload_user']; ?></a>
             </div>
         <?php } ?>
     </div>
+<div class="account-info">
+
+</div>
 </body>
 </html>
