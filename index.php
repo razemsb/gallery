@@ -97,37 +97,7 @@ $result = $conn->query($sql);
     </div>
     <div class="message" id="uploadMessage"><?php echo $message; ?></div>
 
-    <script>
-        const message = document.getElementById('uploadMessage');
-        if (message.innerHTML) {
-            message.style.display = 'block';
-            setTimeout(() => {
-                message.classList.add('fade-out');
-                setTimeout(() => {
-                    message.style.display = 'none';
-                }, 1000); // время анимации изчезновения
-            }, 3000);  // время существования message
-        }
-    function openModal(filename, user, date) {
-    const modal = document.getElementById('myModal');
-    const modalImg = document.getElementById('modalImg');
-    const modalUser = document.getElementById('modalUser');
-    const modalDate = document.getElementById('modalDate');
-    const modalCaption = document.getElementById('modalCaption');
-
-    modal.style.display = "flex"; 
-    modalImg.src = "files/" + filename;
-    modalUser.innerHTML = user;
-    modalDate.innerHTML = date;
-    modalCaption.innerHTML = filename;
-}
-
-// Функция для закрытия модального окна
-function closeModal() {
-    const modal = document.getElementById('myModal');
-    modal.style.display = "none"; // Скрываем модальное окно
-}
-    </script>
+<script src="script/scripts.js"></script>
 </body>
 </html>
 <?php
@@ -159,31 +129,6 @@ function closeModal() {
             <p class="text">Уже зарегистрированы? <a href="#" id="switchToLogin">Вход в аккаунт</a></p><br>
             <input type="submit" value="Зарегистрироваться">
     </form>
-    <script>
-            const message = document.getElementById("uploadMessage");
-            if (message.innerHTML) {
-                message.style.display = "block";
-                setTimeout(() => {
-                    message.classList.add("fade-out");
-                    setTimeout(() => {
-                        message.style.display = "none";
-                    }, 1000); // время анимации изчезновения
-                }, 3000);  // время существования message
-            }
-        </script>
-    <script>
-        document.getElementById("switchToLogin").addEventListener("click", function(e) {
-            e.preventDefault();
-            document.getElementById("form2").classList.add("hidden");
-            document.getElementById("form1").classList.remove("hidden");
-        });
-    
-        document.getElementById("switchToRegister").addEventListener("click", function(e) {
-            e.preventDefault();
-            document.getElementById("form2").classList.remove("hidden");
-            document.getElementById("form1").classList.add("hidden");
-        });
-    </script>
-    ';
+<script src="script/reg.js"></script>';
 }
 ?>
