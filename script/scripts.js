@@ -9,22 +9,18 @@ if (message.innerHTML) {
     }, 3000);  // время существования message
 }
 
-function openModal(filename, user, date) {
-const modal = document.getElementById('myModal');
-const modalImg = document.getElementById('modalImg');
-const modalUser = document.getElementById('modalUser');
-const modalDate = document.getElementById('modalDate');
-const modalCaption = document.getElementById('modalCaption');
+function openModal(filename, uploadUser, uploadDate, upload_path) {
 
-modal.style.display = "flex"; 
-modalImg.src = "files/" + filename;
-modalUser.innerHTML = user;
-modalDate.innerHTML = date;
-modalCaption.innerHTML = filename;
+    document.getElementById('modalImg').src = upload_path;
+    
+    document.getElementById('modalCaption').textContent = filename;
+    document.getElementById('modalUser').textContent = uploadUser;
+    document.getElementById('modalDate').textContent = uploadDate;
+
+    document.getElementById('myModal').style.display = 'block';
 }
 
-// Функция для закрытия модального окна
 function closeModal() {
-const modal = document.getElementById('myModal');
-modal.style.display = "none"; // Скрываем модальное окно
+    document.getElementById('myModal').style.display = 'none';
+    document.getElementById('modalImg').src = '';
 }
