@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.2
+-- version 4.9.5
 -- https://www.phpmyadmin.net/
 --
--- Хост: localhost:3306
--- Время создания: Ноя 08 2024 г., 09:06
--- Версия сервера: 5.7.24
--- Версия PHP: 8.1.0
+-- Host: localhost:3306
+-- Generation Time: Nov 09, 2024 at 10:38 PM
+-- Server version: 5.7.24
+-- PHP Version: 7.4.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,56 +19,46 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `files`
+-- Database: `files`
 --
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `files`
+-- Table structure for table `image`
 --
 
-CREATE TABLE `files` (
-  `ID` int(3) NOT NULL,
-  `Filename` varchar(50) NOT NULL,
-  `upload_date` varchar(50) NOT NULL,
-  `filesize` varchar(50) NOT NULL,
-  `upload_user` varchar(50) NOT NULL,
-  `upload_path` varchar(255) NOT NULL,
-  `likes` varchar(10) NOT NULL
+CREATE TABLE `image` (
+  `ID` int(5) NOT NULL,
+  `Filetitle` varchar(40) NOT NULL,
+  `Filename` varchar(60) NOT NULL,
+  `upload_user` varchar(20) NOT NULL,
+  `upload_date` varchar(20) NOT NULL,
+  `likes` int(10) NOT NULL,
+  `size` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `files`
+-- Dumping data for table `image`
 --
 
-INSERT INTO `files` (`ID`, `Filename`, `upload_date`, `filesize`, `upload_user`, `upload_path`, `likes`) VALUES
-(207, 'doomguy', '2024-10-28 10:21:16', '25663', 'razemsb', 'files/1fdd29ef66dd7106a67cc15a14cb5b29.jpg', '0'),
-(208, 'alucard', '2024-10-28 10:27:24', '54488', 'razemsb', 'files/24d75665-45d7-45ee-ac14-20c230881457.jpeg', '1'),
-(209, 'press_F', '2024-10-28 10:27:51', '31412', 'razemsb', 'files/f9cf0ba1be16700669e87c60333a2e34.jpg', '0'),
-(210, 'woman', '2024-10-28 10:28:18', '82558', 'razemsb', 'files/Yoru.jpeg', '0'),
-(211, 'summer', '2024-10-28 10:28:32', '750494', 'razemsb', 'files/wallpaperflare.com_wallpaper.jpg', '0'),
-(212, 'oiii', '2024-10-28 10:29:18', '103579', 'razemsb', 'files/кфееу.jpg', '0'),
-(214, 'abama', '2024-10-29 06:04:08', '66835', 'razemsb', 'files/5opjcgjmjw.jpg', '0'),
-(215, 'naruto', '2024-10-29 06:09:48', '174784', 'razemsb', 'files/1393335-new-akatsuki-wallpaper-1920x1080-for-pc (2).jpg', '0'),
-(216, 'apple', '2024-10-29 06:14:51', '175213', 'razemsb', 'files/red-apple-fruit.jpg', '0'),
-(217, 'stasyan', '2024-10-29 06:16:32', '490726', 'punk', 'files/свинка.jpg', '0'),
-(218, 'shish', '2024-10-29 06:17:01', '14529', 'punk', 'files/ЩИИИИИИИЩЬ.jfif', '0'),
-(219, 'sunrise', '2024-10-29 06:17:51', '1499220', 'punk', 'files/HORIZO~1.JPG', '0'),
-(220, 'nowoman', '2024-10-29 06:23:02', '223819', 'razemsb', 'files/2Uh8IHcXY_0.jpg', '0'),
-(221, 'apple', '2024-10-29 08:31:50', '1131166', 'razemsb', 'files/33a158aca937ec804b8871264a610a36.gif', '0'),
-(222, 'kirik', '2024-10-29 10:14:27', '64631', 'razemsb', 'files/1.-Printsip-raboty-lokalnoj-seti.jpg', '0'),
-(223, 'zhaba', '2024-10-30 09:25:25', '98432', 'razemsb', 'files/003.jpg', '0'),
-(224, 'face', '2024-11-05 10:07:23', '14700', 'razemsb', 'files/homeless-beggar-emoticon-begging-money-260nw-1330219121.jpg', '0'),
-(227, 'fff', '2024-11-07 08:40:18', '139071', 'opiuopi', 'files/adidas4.png', '0'),
-(228, 'apple', '2024-11-07 08:40:29', '64545', 'opiuopi', 'files/adidas2.png', '0'),
-(229, 'adiki3', '2024-11-08 06:09:18', '66622', 'razemsb', 'files/adidas3.png', '0'),
-(230, 'modal_kall', '2024-11-08 06:13:32', '81037', 'razemsb', 'files/nike1.png', '');
+INSERT INTO `image` (`ID`, `Filetitle`, `Filename`, `upload_user`, `upload_date`, `likes`, `size`) VALUES
+(2, 'kirik', 'files/3cb3d453-769d-409f-80fc-e42d6b885d4f.jpeg', 'razemsb', '2024-11-08 10:50:32', 11, 16280),
+(3, 'kalbIBaH', 'files/09d6ab14-05f9-411c-b45d-1e6246e48552.jpeg', 'razemsb', '2024-11-08 13:44:24', 2, 76422),
+(4, 'alucard', 'files/1748a587-5ef1-423f-b465-647b76a55823.jpeg', 'razemsb', '2024-11-08 13:51:20', 1, 40957),
+(5, 'doomguy', 'files/f9cf0ba1be16700669e87c60333a2e34.jpg', 'razemsb', '2024-11-08 13:53:21', 0, 31412),
+(6, 'summer', 'files/wallpaperflare.com_wallpaper (1).jpg', 'razemsb', '2024-11-08 13:53:33', 5, 750494),
+(7, 'alucard', 'files/24d75665-45d7-45ee-ac14-20c230881457.jpeg', 'razemsb', '2024-11-08 14:03:40', 21, 54488),
+(11, 'калыван', 'files/1731086272_2897.jpeg', 'razemsb', '2024-11-08 17:17:51', 24, 49657),
+(12, '$daun', 'files/1731086331_5032.png', 'razemsb', '2024-11-08 17:18:50', 5, 372537),
+(16, 'trash...', 'files/1731183216_8711.png', 'razemsb', '2024-11-09 20:13:35', 0, 640703),
+(17, 'mysor', 'files/1731183240_5528.png', 'razemsb', '2024-11-09 20:14:00', 0, 174489),
+(18, 'ЖЕНЩИНА', 'files/1731183340_7849.png', 'razemsb', '2024-11-09 20:15:40', 0, 624127);
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -79,45 +70,43 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`ID`, `Login`, `Password`, `Email`, `is_admin`) VALUES
-(1, 'razemsb', 'zhaba', 'maxim1xxx363@gmail.com', 1),
-(8, 'bumble', 'zhaba', 'razemsb@gmail.com', 0),
-(9, 'opiuopi', 'zhaba', 'razemsb@gmail.com', 0);
+(1, 'razemsb', 'zhaba', 'maxim1xxx363@gmail.com', 1);
 
 --
--- Индексы сохранённых таблиц
+-- Indexes for dumped tables
 --
 
 --
--- Индексы таблицы `files`
+-- Indexes for table `image`
 --
-ALTER TABLE `files`
+ALTER TABLE `image`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Индексы таблицы `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`ID`);
 
 --
--- AUTO_INCREMENT для сохранённых таблиц
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT для таблицы `files`
+-- AUTO_INCREMENT for table `image`
 --
-ALTER TABLE `files`
-  MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=231;
+ALTER TABLE `image`
+  MODIFY `ID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT для таблицы `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `ID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
