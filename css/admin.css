@@ -1,0 +1,210 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5;
+    color: #333;
+    line-height: 1.6;
+}
+header {
+    background-color: #222;
+    color: #f0f0f0;
+    padding: 15px 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+header nav .btn {
+    background-color: #444;
+    color: #f0f0f0;
+    border: none;
+    padding: 10px 15px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+header nav .btn:hover {
+    background-color: #666;
+}
+.admin-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 25px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+h1 {
+    text-align: center;
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 25px;
+}
+.table-select {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+.table-select button {
+    background-color: #0069d9;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    margin: 0 8px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+.table-select button:hover {
+    background-color: #0053b1;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 25px;
+}
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+    vertical-align: middle;
+}
+table th {
+    background-color: #007BFF;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+table td input[type="text"],
+table td input[type="number"] {
+    width: 95%;
+    padding: 6px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+table td button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+table td button:hover {
+    background-color: #218838;
+}
+.btn {
+    display: inline-block;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 12px;
+    transition: background-color 0.3s;
+}
+.btn:hover {
+    background-color: #c82333;
+}
+.section {
+    display: none; 
+}
+.active {
+    display: block; 
+}
+.nav-button {
+ margin: 5px;
+ padding: 10px;
+ cursor: pointer;
+}
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+}
+header h1 {
+    margin: 0;
+    flex-grow: 1;
+}
+header nav {
+    display: flex;
+}
+.nav-button {
+    background-color: #555;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+.nav-button:hover {
+    background-color: #777;
+}
+.section {
+    display: none;
+}
+.section.active {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+table th {
+    background-color: #007BFF;
+    color: #fff;
+}
+table td input[type="text"],
+table td input[type="number"],
+table td textarea {
+    width: 90%;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+button:hover {
+    background-color: #218838;
+}
+.delete {
+    background-color: #a72828;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+.delete:hover {
+    background-color: #882121;
+}

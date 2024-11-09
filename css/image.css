@@ -1,0 +1,97 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 50px;
+    padding: 20px;
+}
+.image-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.image {
+    margin-top: 20px;
+    padding-right: 100px;
+    max-width: 80%;
+    height: auto;
+    max-height: 500px;
+    border-radius: 10px;
+    z-index: 1;
+}
+
+.info-section {
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+    max-height: 700px;
+    width: 1200px;
+    flex: 1;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 50px;
+    gap: 10px; 
+    z-index: 2;
+}
+.like-button, .download-button, .delete_button {
+    margin-top: 10px;
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    color: white;
+    text-align: center;
+    min-width: 100px;
+    z-index: 2;
+}
+
+.filename {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.likes-count {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.like-button, .download-button, .delete_button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    color: white;
+    text-align: center;
+}
+
+.like-button {
+    background-color: #ff4b5c;
+}
+
+.download-button {
+    background-color: #4CAF50;
+    text-decoration: none;
+}
+.delete_button {
+    background-color: #ff4b5c;
+}

@@ -24,3 +24,10 @@ function closeModal() {
     document.getElementById('myModal').style.display = 'none';
     document.getElementById('modalImg').src = '';
 }
+function openModal2() {
+    document.getElementById('myModal2').style.display = 'block';
+}
+
+function closeModal2() {
+    document.getElementById('myModal2').style.display = 'none';
+}
