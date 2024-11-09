@@ -1,20 +1,23 @@
 <?php
 session_start();
 require_once('db.php');
+
 $user_login = $_SESSION['user_login'];
+$is_admin = $_SESSION['is_admin'];
 
 if ($_SESSION['user_login']) {
-
-    $message = ""; 
+    $message = "";
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES["filename"])) {
         if ($_FILES["filename"]["error"] == UPLOAD_ERR_OK) {
-            $originalName = basename($_FILES["filename"]["name"]);
             $fileTitle = $_POST['file_title'];
             $uploadDir = "files/";
-            $uploadFile = $uploadDir . $originalName;
+            $fileExtension = pathinfo($_FILES["filename"]["name"], PATHINFO_EXTENSION);
+            $newFilename = round(microtime(true)) . '_' . rand(1000, 9999) . '.' . $fileExtension;
+            $uploadFile = $uploadDir . $newFilename;
             $filesize = $_FILES["filename"]["size"];
-            $allowedTypes = ['image/jpeg', 'image/png', 'image/svg+xml'];
+            $allowedTypes = ['image/jpeg', 'image/png', 'image/svg+xml', 'image/gif'];
+            $likes = 0;
 
             if (!in_array($_FILES["filename"]["type"], $allowedTypes)) {
                 $message = "Загружать можно только изображения (jpeg, png, svg).";
@@ -26,27 +29,36 @@ if ($_SESSION['user_login']) {
                 $uploadTime = date('Y-m-d H:i:s');
                 
                 if (move_uploaded_file($_FILES["filename"]["tmp_name"], $uploadFile)) {
-                    $message = "Файл загружен: $originalName";
+                    $message = "Файл загружен: $newFilename";
                     
-                    $sql = "INSERT INTO files (Filename, upload_date, filesize, upload_user, upload_path) VALUES (?, ?, ?, ?, ?)";
+                    $sql = "INSERT INTO image (Filetitle, Filename, upload_user, upload_date, likes, size) VALUES (?, ?, ?, ?, ?, ?)";
                     $stmt = $conn->prepare($sql);
-                    $stmt->bind_param("sssss", $fileTitle, $uploadTime, $filesize, $user_login, $uploadFile);
-
-                    if ($stmt->execute()) {
-                        $message .= "<br>Информация о файле успешно сохранена в базе данных.";
+                
+                    if ($stmt) {
+                        $stmt->bind_param("ssssis", $fileTitle, $uploadFile, $user_login, $uploadTime, $likes, $filesize);
+                
+                        if ($stmt->execute()) {
+                            $message .= "<br>Информация о файле успешно сохранена в базе данных.";
+                            header('Location: index.php');
+                            exit();
+                        } else {
+                            $message .= "<br>Ошибка при сохранении информации о файле в базе данных: " . $stmt->error;
+                        }
+                        
+                        $stmt->close();
                     } else {
-                        $message .= "<br>Ошибка при сохранении информации о файле в базе данных: " . $stmt->error;
+                        $message .= "<br>Ошибка при подготовке запроса: " . $conn->error;
                     }
-
-                    $stmt->close();
                 } else {
                     $message = "Ошибка при загрузке файла.";
                 }
             }
+        } else {
+            $message = "Ошибка при загрузке файла. Код ошибки: " . $_FILES["filename"]["error"];
         }
     }
 
-    $sql = "SELECT Filename, upload_date, upload_user, upload_path FROM files";
+    $sql = "SELECT ID, Filetitle, Filename, upload_user, upload_date FROM image";
     $result = $conn->query($sql);
 ?>
 <!DOCTYPE html>
@@ -55,7 +67,6 @@ if ($_SESSION['user_login']) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/index.css">
     <title>Файл-загрузчик</title>
 </head>
 <body>
@@ -63,8 +74,12 @@ if ($_SESSION['user_login']) {
 <nav>
 <ul class="list">
 <li><a href="session_destroy.php">Выйти из аккаунта</a></li>
+<?php if ($is_admin): ?>
+<li><a href="admin.php">Админ</a></li><br>
+<?php endif; ?>
+<li><a onclick="openModal2()">Загрузить файл</a></li>
 <div class="right">
-<li><a href="account.php">Ваш аккаунт: <?echo $user_login;?></a></li>
+<li><a href="account.php">Ваш аккаунт: <?php echo $user_login; ?></a></li>
 </div>
 </ul>
 </nav>
@@ -72,32 +87,23 @@ if ($_SESSION['user_login']) {
 <div class="gallery">
     <?php while ($row = $result->fetch_assoc()) { ?>
         <div class="image-block">
-            <img src="<?php echo htmlspecialchars($row['upload_path']); ?>" 
-                 alt="<?php echo htmlspecialchars($row['Filename']); ?>" 
+            <img src="<?php echo htmlspecialchars($row['Filename']); ?>" 
+                 alt="<?php echo htmlspecialchars($row['Filetitle']); ?>" 
                  class="image" 
-                 onclick="openModal('<?php echo htmlspecialchars($row['Filename']); ?>', '<?php echo htmlspecialchars($row['upload_user']); ?>', '<?php echo htmlspecialchars($row['upload_date']); ?>', '<?php echo htmlspecialchars($row['upload_path']); ?>')">
-            <div class="file-name"><?php echo htmlspecialchars($row['Filename']); ?></div>
+                 onclick="window.location.href='image.php?id=<?= $row['ID']; ?>';">
+            <div class="file-name"><?php echo htmlspecialchars($row['Filetitle']); ?></div>
             <a class="users">Файл загружен: <?php echo htmlspecialchars($row['upload_user']); ?></a>
         </div>
+        
     <?php } ?>
 </div>
-<div id="myModal" class="modal">
-    <span class="modal-close" onclick="closeModal()">&times;</span>
-    <div class="modal-content-wrapper">
-        <img class="modal-content" id="modalImg">
-        <div class="modal-text-content">
-            <div class="modal-caption" id="modalCaption"></div>
-            <div class="modal-text">Загрузил: <span id="modalUser"></span></div>
-            <div class="modal-text">Дата загрузки: <span id="modalDate"></span></div>
-            <button id="downloadBtn" class="download-button" style="margin-top: 10px;" onclick="downloadImage()">Скачать</button>
-        </div>
-    </div>
-</div>
-
-<div class="upload-container">
+<div class="message" id="uploadMessage"><?php echo $message; ?></div>
+<div id="myModal2" class="modal">
+    <div class="upload-container">
     <form method="post" enctype="multipart/form-data">
         <h2>Загрузить файл</h2>
-        <input type="file" name="filename" size="10" required onchange="showTitleField()" /><br><br>
+        <span class="modal-close" onclick="closeModal2()">&times;</span>
+        <input type="file" name="filename" size="20" required onchange="showTitleField()" accept="image/png, image/gif, image/jpeg"/><br><br>
         
         <div id="titleField" style="display: none;">
             <input type="text" name="file_title" placeholder="Название файла" required><br><br>
@@ -106,7 +112,7 @@ if ($_SESSION['user_login']) {
         <input type="submit" value="Загрузить">
     </form>
 </div>
-    <div class="message" id="uploadMessage"><?php echo $message; ?></div>
+</div>
 
 <script src="script/scripts.js"></script>
 <script src="script/upload.js"></script>
@@ -141,7 +147,8 @@ if ($_SESSION['user_login']) {
             <input type="email" name="email" placeholder="Почта" required><br>
             <p class="text">Уже зарегистрированы? <a href="#" id="switchToLogin">Вход в аккаунт</a></p><br>
             <input type="submit" value="Зарегистрироваться">
-    </form>
+        </form>
+    </div>
 <script src="script/reg.js"></script>';
 }
 ?>

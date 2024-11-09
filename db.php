@@ -2,7 +2,7 @@
 $user = "root";
 $password = "root";
 $host = "localhost";
-$db = "FILES";
+$db = "files";
 
 // Создание соединения
 $conn = new mysqli($host, $user, $password, $db);

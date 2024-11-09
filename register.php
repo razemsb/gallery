@@ -33,12 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "<script>alert('Этот логин уже занят. Пожалуйста, выберите другой.'); window.location.href = 'index.php';</script>";
         exit();
     }
-
-    $avatar = '';
-    $is_admin = 0; 
-    $count = 0;
-    $stmt = $conn->prepare("INSERT INTO users (Login, Password, Email) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $name, $pass, $email);
+    $is_admin = "0";
+    $stmt = $conn->prepare("INSERT INTO users (Login, Password, Email, is_admin) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("sssi", $name, $pass, $email, $is_admin);
 
     if ($stmt->execute()) {
         echo "<script>alert('Успешная регистрация'); window.location.href = 'index.php';</script>";
