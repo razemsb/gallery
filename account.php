@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 session_start();
 $user_login = $_SESSION['user_login'];
 require_once('db.php');
@@ -12,7 +15,7 @@ if (isset($_GET['delete']) && isset($_GET['file'])) {
     if (file_exists($filePath)) {
         if (unlink($filePath)) {
 
-            $sql = "DELETE FROM files WHERE Filename = ? AND upload_user = ?";
+            $sql = "DELETE FROM image WHERE Filename = ? AND upload_user = ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("ss", $fileToDelete, $user_login);
 
@@ -30,7 +33,7 @@ if (isset($_GET['delete']) && isset($_GET['file'])) {
     }
 }
 
-$sql = "SELECT Filename, upload_date, upload_user, upload_path FROM files WHERE upload_user = ?";
+$sql = "SELECT ID, Filetitle, Filename, upload_user, upload_date FROM image WHERE upload_user = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $user_login);
 $stmt->execute();
@@ -60,11 +63,11 @@ $result = $stmt->get_result();
 <div class="gallery">
     <?php while ($row = $result->fetch_assoc()) { ?>
         <div class="image-block">
-            <img src="<?php echo htmlspecialchars($row['upload_path']); ?>" 
-                 alt="<?php echo htmlspecialchars($row['Filename']); ?>" 
+            <img src="<?php echo htmlspecialchars($row['Filename']); ?>" 
+                 alt="<?php echo htmlspecialchars($row['Filetitle']); ?>" 
                  class="image" 
-                 onclick="openModal('<?php echo htmlspecialchars($row['Filename']); ?>', '<?php echo htmlspecialchars($row['upload_user']); ?>', '<?php echo htmlspecialchars($row['upload_date']); ?>', '<?php echo htmlspecialchars($row['upload_path']); ?>')">
-            <div class="file-name"><?php echo htmlspecialchars($row['Filename']); ?></div>
+                 onclick="openModal('<?php echo htmlspecialchars($row['Filetitle']); ?>', <?php echo htmlspecialchars($row['Filename']); ?>', '<?php echo htmlspecialchars($row['upload_user']); ?>', '<?php echo htmlspecialchars($row['upload_date']); ?>'">
+            <div class="file-name"><?php echo htmlspecialchars($row['Filetitle']); ?></div>
             <a class="users">Файл загружен: <?php echo htmlspecialchars($row['upload_user']); ?></a>
         </div>
     <?php } ?>

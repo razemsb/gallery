@@ -36,6 +36,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         <button class="nav-button" onclick="window.location.href='index.php';">Главная</button>
         <button class="nav-button" onclick="showSection('manage-users')">Управление пользователями</button>
         <button class="nav-button" onclick="showSection('manage-img')">Управление картинками</button>
+        <button class="nav-button" onclick="showSection('manage-log')">Логи</button>
     </nav>
 </header>
 
@@ -99,6 +100,29 @@ while ($row = mysqli_fetch_assoc($result)) {
             <?php endforeach; ?>
         </tbody>
     </table>
+</div>
+
+<div id="manage-log" class="section">
+    <h2>Логи</h2>
+    <div class="log-container">
+    <?php
+    $logFile = 'log.log';
+    $logs = file_get_contents($logFile);
+      $logs = explode("\n", $logs);
+
+      foreach ($logs as $log) {
+        if (trim($log) !== '') {
+          $parts = explode(' - ', $log);
+          $timestamp = $parts[0];
+          $message = $parts[1];
+          echo "<div class='log-entry'>";
+          echo "<span class='log-entry-timestamp'>$timestamp</span>";
+          echo "<span class='log-entry-message'>$message</span>";
+          echo "</div>";
+        }
+      }
+    ?>
+  </div>
 </div>
 
 <script src="script.js"></script>

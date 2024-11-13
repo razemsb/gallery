@@ -208,3 +208,23 @@ button:hover {
 .delete:hover {
     background-color: #882121;
 }
+.log-container {
+    width: 90%;
+    margin: 20px auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .log-entry {
+    padding: 5px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .log-entry-timestamp {
+    font-weight: bold;
+  }
+
+  .log-entry-message {
+    margin-left: 10px;
+  }

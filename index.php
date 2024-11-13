@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once('db.php');
+require_once('log.php');
 
 $user_login = $_SESSION['user_login'];
 $is_admin = $_SESSION['is_admin'];
@@ -39,22 +40,27 @@ if ($_SESSION['user_login']) {
                 
                         if ($stmt->execute()) {
                             $message .= "<br>Информация о файле успешно сохранена в базе данных.";
+                            writeToLog("загрузка фото успех", $user_login);
                             header('Location: index.php');
                             exit();
                         } else {
                             $message .= "<br>Ошибка при сохранении информации о файле в базе данных: " . $stmt->error;
+                            writeToLog("загрузка фото неудача", $user_login);
                         }
                         
                         $stmt->close();
                     } else {
                         $message .= "<br>Ошибка при подготовке запроса: " . $conn->error;
+                        writeToLog("загрузка фото неудача", $user_login);
                     }
                 } else {
                     $message = "Ошибка при загрузке файла.";
+                    writeToLog("загрузка фото неудача", $user_login);
                 }
             }
         } else {
             $message = "Ошибка при загрузке файла. Код ошибки: " . $_FILES["filename"]["error"];
+            writeToLog("загрузка фото неудача", $user_login);
         }
     }
 
@@ -67,6 +73,7 @@ if ($_SESSION['user_login']) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/index.css">
     <title>Файл-загрузчик</title>
 </head>
 <body>

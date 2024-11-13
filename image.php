@@ -1,5 +1,6 @@
 <?php
 require_once('db.php');
+require_once('log.php');
 session_start();
 $user_login = $_SESSION['user_login'];
 $is_admin = $_SESSION['is_admin'];
@@ -13,6 +14,7 @@ if (isset($_GET['id'])) {
         $row = $result->fetch_assoc();
         $ID = htmlspecialchars($row['ID']);
         $filename = htmlspecialchars($row['Filetitle']);
+        $upload_user = htmlspecialchars($row['upload_user']);
         $upload_path = htmlspecialchars($row['Filename']);
         $likes = (int)$row['likes'];
     } else {
@@ -26,6 +28,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['like'])) {
     header("Location: image.php?id=$imageID");
     exit();
 }
+/*
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filetitle'])) {
+    $newname = $_POST['filetitle'];
+    writeToLog($newname . "название");
+    $conn->query("UPDATE Filetitle = $newname FROM image WHERE ID = $imageID");
+    header("Location: image.php?id=$imageID");
+    exit();
+}
+*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,14 +72,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['like'])) {
         </form>
         <a href="<?= $upload_path ?>" download="<?= $filename ?>" class="download-button">⬇️ Скачать</a>
         <?php if ($is_admin): ?>
-<form action="delete_img.php" method="POST">
+<form action="delete_img.php" method="post">
 <input type="hidden" name="id" value="<?= htmlspecialchars($ID) ?>">
 <button type="submit" class="delete_button">Удалить</button><br>
 </form>
-<?php endif; ?>
+<?php
+ endif; ?>
     </div>
+        <?php if ($upload_user == $user_login): ?>
+        <form method="post">
+        <input type="text" name="filetitle" value="<?= $filename ?>">
+        <input type="submit" value="Сохранить">
+        </form>
+        <?php else: ?>
         <h2 class="filename"><?= $filename ?></h2>
-        <p class="likes-count">❤️ <?= $likes ?> лайков</p>
+        <?php endif; ?>
+        <p class="likes-count">❤️ <?= $likes ?></p>
     </div>
 </div>
     </div>

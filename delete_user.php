@@ -15,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
 
     if (mysqli_query($conn, $query)) {
         header('Location: admin.php'); 
+        writeToLog("удаление пользователя удачно", $user_login);
         exit();
     } else {
         echo "Error deleting user: " . mysqli_error($conn);

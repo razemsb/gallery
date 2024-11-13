@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 09, 2024 at 10:38 PM
+-- Generation Time: Nov 13, 2024 at 08:18 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -43,17 +43,16 @@ CREATE TABLE `image` (
 --
 
 INSERT INTO `image` (`ID`, `Filetitle`, `Filename`, `upload_user`, `upload_date`, `likes`, `size`) VALUES
-(2, 'kirik', 'files/3cb3d453-769d-409f-80fc-e42d6b885d4f.jpeg', 'razemsb', '2024-11-08 10:50:32', 11, 16280),
-(3, 'kalbIBaH', 'files/09d6ab14-05f9-411c-b45d-1e6246e48552.jpeg', 'razemsb', '2024-11-08 13:44:24', 2, 76422),
-(4, 'alucard', 'files/1748a587-5ef1-423f-b465-647b76a55823.jpeg', 'razemsb', '2024-11-08 13:51:20', 1, 40957),
-(5, 'doomguy', 'files/f9cf0ba1be16700669e87c60333a2e34.jpg', 'razemsb', '2024-11-08 13:53:21', 0, 31412),
-(6, 'summer', 'files/wallpaperflare.com_wallpaper (1).jpg', 'razemsb', '2024-11-08 13:53:33', 5, 750494),
-(7, 'alucard', 'files/24d75665-45d7-45ee-ac14-20c230881457.jpeg', 'razemsb', '2024-11-08 14:03:40', 21, 54488),
-(11, 'калыван', 'files/1731086272_2897.jpeg', 'razemsb', '2024-11-08 17:17:51', 24, 49657),
-(12, '$daun', 'files/1731086331_5032.png', 'razemsb', '2024-11-08 17:18:50', 5, 372537),
-(16, 'trash...', 'files/1731183216_8711.png', 'razemsb', '2024-11-09 20:13:35', 0, 640703),
-(17, 'mysor', 'files/1731183240_5528.png', 'razemsb', '2024-11-09 20:14:00', 0, 174489),
-(18, 'ЖЕНЩИНА', 'files/1731183340_7849.png', 'razemsb', '2024-11-09 20:15:40', 0, 624127);
+(24, 'alucard', 'files/1731510004_8590.jpeg', 'razemsb', '2024-11-13 18:00:04', 1, 40957),
+(25, 'press_f', 'files/1731510012_1761.jpg', 'razemsb', '2024-11-13 18:00:12', 0, 31412),
+(26, 'nigga', 'files/1731510023_3887.jpeg', 'razemsb', '2024-11-13 18:00:22', 0, 16280),
+(27, 'summer', 'files/1731510036_9384.jpg', 'razemsb', '2024-11-13 18:00:36', 0, 750494),
+(28, 'kalblBaH', 'files/1731510058_1755.jpeg', 'razemsb', '2024-11-13 18:00:58', 0, 49657),
+(29, 'trash', 'files/1731510068_6777.jpg', 'razemsb', '2024-11-13 18:01:07', 0, 103579),
+(30, 'alucard', 'files/1731510080_7289.jpeg', 'razemsb', '2024-11-13 18:01:19', 0, 54488),
+(31, 'facts', 'files/1731510249_9975.jpg', 'snaff', '2024-11-13 18:04:09', 0, 25663),
+(32, '$daun', 'files/1731510340_5384.png', 'snaff', '2024-11-13 18:05:39', 0, 372537),
+(33, 'zhaba lox', 'files/1731510363_1796.jpeg', 'snaff', '2024-11-13 18:06:03', 0, 17848);
 
 -- --------------------------------------------------------
 
@@ -100,13 +99,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `image`
 --
 ALTER TABLE `image`
-  MODIFY `ID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `ID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
